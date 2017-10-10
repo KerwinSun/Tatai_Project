@@ -8,7 +8,8 @@ import model.ProblemGenerator;
 
 public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerator{
 
-		
+		private boolean wordmode =false;
+		private boolean mathmode =true;
 		protected int lowrange; // Lowest supported value is 1
 		protected int highrange; // Highest supported value is 99
 		protected Random rng; // Dependency injection
@@ -27,7 +28,49 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 		public Problem newProblem() {
 			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
 			String maoriValue = int2maori(value);
-			return new Problem(genQuestion(value),maoriValue);
+			if (mathmode == false) {
+				if (wordmode == false) {
+					return new Problem(genQuestion(value),maoriValue);
+				}else {
+					return new Problem(maoriValue,maoriValue);
+				}
+				
+			}else {
+				int mathnum = rng.nextInt(highrange-lowrange+1) + lowrange;
+				if (mathnum==value) {
+					if (mathnum==highrange) {
+						mathnum--;
+					}else {
+						mathnum++;
+					}
+				}
+				int remain = value - mathnum;
+				String equation;
+				if (remain < 0) {
+					if (wordmode) {
+						equation = int2maori(mathnum) + " - " + int2maori(Math.abs(remain));
+					}else {
+						equation = mathnum + " - " + Math.abs(remain);
+					}
+					
+				}else {
+					if (wordmode) {
+						equation = int2maori(mathnum) + " + " + int2maori(remain);
+					}else {
+						equation = mathnum + " + " + remain;
+					}
+				}
+				return new Problem(equation,maoriValue);
+			}
+			
+			
+		}
+		
+		public void wordMode(boolean mode) {
+			wordmode=mode;
+		}
+		public void mathMode(boolean mode) {
+			mathmode=mode;
 		}
 		
 		/**
