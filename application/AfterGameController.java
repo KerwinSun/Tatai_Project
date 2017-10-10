@@ -1,6 +1,8 @@
 package application;
 
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Difficulty;
 import model.GameSessionMaster;
+import model.Highscore;
 import model.ProblemDatum;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -70,7 +73,16 @@ public class AfterGameController {
 	 */
 	@FXML
 	private void initialize() {
-        displayGameStats();
+		try {
+			
+			saveHighscore();
+		
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		displayGameStats();
         displayScore();
         giveFeedback();
         
@@ -140,4 +152,31 @@ public class AfterGameController {
         }
         difficultyIcon.setImage(image);
 	}
+	
+	//saves the high score in array list format to text file
+	private void saveHighscore() throws IOException {
+		
+		Difficulty difficulty = GameSessionMaster.getInstance().getDifficulty();
+		int score = GameSessionMaster.getInstance().getScore();
+		
+		if(difficulty.equals(Difficulty.HARD)) {
+			
+			Highscore saveScore = new Highscore();
+			saveScore.addHighscore("Hard", score);
+			
+		}else if(difficulty.equals(Difficulty.EASY)) {
+			
+			Highscore saveScore = new Highscore();
+			saveScore.addHighscore("Easy", score);
+			
+		}
+		
+	
+	
+	}
+
+
+
+
+
 }

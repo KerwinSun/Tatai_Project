@@ -19,7 +19,7 @@ public class Statistics {
 	 * Maps the names of difficulties to the number of games played
 	 */
 	private HashMap<String,Integer> games;
-	
+	 
 	/**
 	 * Maps the names of difficulties to the number of games won
 	 */

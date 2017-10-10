@@ -1,17 +1,29 @@
 package application;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import model.Difficulty;
 import model.GameSessionMaster;
+import model.Highscore;
 
 /**
  * This class controls the GUI screen which appears before the user has finished 
  * a game.
  */
-public class BeforeGameController {
+public class BeforeGameController implements Initializable{
 	
 	@FXML
 	private Button startButton;
@@ -21,9 +33,16 @@ public class BeforeGameController {
 	private Label userStats;
 	@FXML
 	private ToggleGroup difficultyGroup;
+	@FXML
+	private Tab highscoreBar;
+	@FXML
+	private TableView easyTable;
+	@FXML
+	private TableView hardTable;
 	
-	private Difficulty difficulty;
+	Highscore highscore = new Highscore();
 	
+			private Difficulty difficulty;
 	/**
 	 * Starts a new game of Tatai
 	 */
@@ -55,6 +74,51 @@ public class BeforeGameController {
 		gameSelected();
 	}
 	
+	@FXML
+	private void highscoreUpdate(){
+		
+		
+	}
+	
+	
+	private void easyScoreUpdate()
+	{
+		ArrayList<String> highscoreData = highscore.getHighscore("Easy");
+		System.out.println(highscoreData);
+		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
+		
+		easyTable.setPlaceholder(new Label("No Scores"));
+		easyTable.setEditable(true);
+		easyTable.setItems(data);
+		
+		TableColumn<String, String> tc = new TableColumn<>("Easy");
+		tc.setPrefWidth(120);
+		tc.setCellValueFactory((p) -> {
+			return new ReadOnlyStringWrapper(p.getValue());
+		});
+		easyTable.getColumns().add(tc);
+
+	
+	}
+	
+	private void hardScoreUpdate() {
+		
+		ArrayList<String> highscoreData = highscore.getHighscore("Hard");
+		System.out.println(highscoreData);
+		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
+		
+		hardTable.setPlaceholder(new Label("No Scores"));
+		hardTable.setEditable(true);
+		hardTable.setItems(data);
+		
+		TableColumn<String, String> tc = new TableColumn<>("Hard");
+		tc.setPrefWidth(120);
+		tc.setCellValueFactory((p) -> {
+			return new ReadOnlyStringWrapper(p.getValue());
+		});
+		hardTable.getColumns().add(tc);
+	
+	}
 	/**
 	 * Shows the user statistics for their specified difficulty level and allows
 	 * a game to be started.
@@ -64,6 +128,7 @@ public class BeforeGameController {
 		// Show user statistics for their specified difficulty level
 		showStats();
 
+		
 		// Allow game to be started
 		enableStart();
 	}
@@ -86,5 +151,13 @@ public class BeforeGameController {
 	 */
 	private void enableStart() {
 		startButton.setDisable(false);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		easyScoreUpdate();
+		hardScoreUpdate();
+		
 	}
 }
