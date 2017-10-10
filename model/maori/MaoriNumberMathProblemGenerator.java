@@ -1,5 +1,6 @@
 package model.maori;
 
+import java.util.Hashtable;
 import java.util.Random;
 
 import model.Problem;
@@ -7,6 +8,7 @@ import model.ProblemGenerator;
 
 public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerator{
 
+		
 		protected int lowrange; // Lowest supported value is 1
 		protected int highrange; // Highest supported value is 99
 		protected Random rng; // Dependency injection
@@ -32,10 +34,23 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 		 * An enum that represents Maori digits.
 		 */
 		public enum MaoriNum {
-			TAHI, RUA, TORU, WHAA, RIMA, ONO, WHITU, WARU, IWA, TEKAU, MAA;
 			
+			TAHI, RUA, TORU, WHAA, RIMA, ONO, WHITU, WARU, IWA, TEKAU, MAA;
+			private Hashtable<String,String> htkWordMap;
 			public String toString() {
-				return super.toString().toLowerCase();
+				htkWordMap = new Hashtable<String,String>();
+				htkWordMap.put("tahi", "tahi");
+				htkWordMap.put("rua", "rua");
+				htkWordMap.put("toru", "toru");
+				htkWordMap.put("whaa", "whā");
+				htkWordMap.put("rima", "rima");
+				htkWordMap.put("ono", "ono");
+				htkWordMap.put("whitu", "whitu");
+				htkWordMap.put("waru", "waru");
+				htkWordMap.put("iwa", "iwa");
+				htkWordMap.put("tekau", "tekau");
+				htkWordMap.put("maa", "mā");
+				return htkWordMap.get(super.toString().toLowerCase());
 			}
 		}
 
