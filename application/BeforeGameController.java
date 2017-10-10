@@ -79,46 +79,27 @@ public class BeforeGameController implements Initializable{
 		
 		
 	}
-	
-	
-	private void easyScoreUpdate()
+	//updates the score on startup or after a game
+	private void ScoreUpdate(TableView Table, String mode)
 	{
-		ArrayList<String> highscoreData = highscore.getHighscore("Easy");
+		ArrayList<String> highscoreData = highscore.getHighscore(mode);
 		System.out.println(highscoreData);
 		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
 		
-		easyTable.setPlaceholder(new Label("No Scores"));
-		easyTable.setEditable(true);
-		easyTable.setItems(data);
+		Table.setPlaceholder(new Label("No Scores"));
+		Table.setEditable(true);
+		Table.setItems(data);
 		
-		TableColumn<String, String> tc = new TableColumn<>("Easy");
-		tc.setPrefWidth(120);
+		TableColumn<String, String> tc = new TableColumn<>(mode);
+		tc.setPrefWidth(99);
 		tc.setCellValueFactory((p) -> {
 			return new ReadOnlyStringWrapper(p.getValue());
 		});
-		easyTable.getColumns().add(tc);
+		Table.getColumns().add(tc);
 
 	
 	}
 	
-	private void hardScoreUpdate() {
-		
-		ArrayList<String> highscoreData = highscore.getHighscore("Hard");
-		System.out.println(highscoreData);
-		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
-		
-		hardTable.setPlaceholder(new Label("No Scores"));
-		hardTable.setEditable(true);
-		hardTable.setItems(data);
-		
-		TableColumn<String, String> tc = new TableColumn<>("Hard");
-		tc.setPrefWidth(120);
-		tc.setCellValueFactory((p) -> {
-			return new ReadOnlyStringWrapper(p.getValue());
-		});
-		hardTable.getColumns().add(tc);
-	
-	}
 	/**
 	 * Shows the user statistics for their specified difficulty level and allows
 	 * a game to be started.
@@ -153,11 +134,12 @@ public class BeforeGameController implements Initializable{
 		startButton.setDisable(false);
 	}
 
+	//calls update when game starts
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		easyScoreUpdate();
-		hardScoreUpdate();
+		ScoreUpdate(easyTable, "Easy");
+		ScoreUpdate(hardTable, "Hard");
 		
 	}
 }
