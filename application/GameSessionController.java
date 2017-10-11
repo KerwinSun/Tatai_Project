@@ -5,7 +5,10 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -88,7 +91,12 @@ public class GameSessionController implements InterpreterListener {
 	 */
 	@FXML
 	private void exitGame() {
-		TataiApp.getInstance().nextScene(false);
+		Alert alert = new Alert(AlertType.CONFIRMATION, "End current game?",  ButtonType.NO,ButtonType.YES);
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.YES) {
+			TataiApp.getInstance().nextScene(false);
+		}
+		
 	}
 
 	/**
