@@ -1,6 +1,7 @@
 package model;
 
 import model.maori.LargeNumberProblemGenerator;
+import model.maori.MaoriNumberMathProblemGenerator;
 import model.maori.SmallNumberProblemGenerator;
 
 /**
@@ -48,15 +49,20 @@ public class GameSessionMaster {
 	 * Creates a model for a new game
 	 * @param difficulty the difficulty level of the game to be started
 	 */
-	public void newGame(Difficulty difficulty) {
-		
+	public void newGame(Difficulty difficulty,boolean wordmode) {
+		MaoriNumberMathProblemGenerator gen;
 		// Create a GameMaster to store the state of the game
 		if (difficulty.equals(Difficulty.EASY)) {
-			game = new GameMaster(new SmallNumberProblemGenerator(), NUM_QUESTIONS);
+			
+			gen = new SmallNumberProblemGenerator();
 		} else {
-			game = new GameMaster(new LargeNumberProblemGenerator(), NUM_QUESTIONS);
+			gen = new LargeNumberProblemGenerator();
 		}
-		
+		if (wordmode) {
+			gen.wordMode(wordmode);
+		}
+		gen.mathMode(true);
+		game = new GameMaster(gen, NUM_QUESTIONS);
 		attemptsRemaining = MAX_ATTEMPTS;
 		questionNum = 1;
 		gameIsOver = false;

@@ -1,5 +1,8 @@
 package application;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,6 +25,7 @@ public class TataiApp extends Application {
 	private Stage primaryStage;
 	private static TataiApp app;
 	
+	
 	/**
 	 * Starts the Tatai program
 	 * @param args a String array representing the command line input
@@ -39,8 +43,8 @@ public class TataiApp extends Application {
 	 * the user to start a new game
 	 */
 	@Override
-	public void start(Stage primaryStage) {
-
+	public void start(Stage primaryStage) {	
+		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setResizable(false);
 		nextScene(false); // Initialise game to first scene
@@ -85,6 +89,7 @@ public class TataiApp extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		
 	}
 

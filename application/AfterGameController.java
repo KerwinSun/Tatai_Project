@@ -55,7 +55,7 @@ public class AfterGameController {
 	 */
 	@FXML
 	private void newEasyGame() {
-		GameSessionMaster.getInstance().newGame(Difficulty.EASY);
+		GameSessionMaster.getInstance().newGame(Difficulty.EASY,true);
 		TataiApp.getInstance().nextScene(false);
 	}
 	
@@ -64,7 +64,7 @@ public class AfterGameController {
 	 */
 	@FXML
 	private void newHardGame() {
-		GameSessionMaster.getInstance().newGame(Difficulty.HARD);
+		GameSessionMaster.getInstance().newGame(Difficulty.HARD,true);
 		TataiApp.getInstance().nextScene(false);
 	}
 	

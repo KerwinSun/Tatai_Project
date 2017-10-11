@@ -25,7 +25,7 @@ import model.GameSessionMaster;
 public class GameSessionController implements InterpreterListener {
 	
 	private static final String PATH_TO_PASS_SOUND = "pass.mp3";
-
+	private Background oldb;
 	private MaoriNumberInterpreter voiceRecogniser;
 	
 	@FXML
@@ -54,6 +54,7 @@ public class GameSessionController implements InterpreterListener {
 	 */
 	@FXML
 	private void initialize() {
+		oldb = backgroundPanel.getBackground();
 		setDifficultyIcon();
 		setProblem();
 	}
@@ -259,7 +260,7 @@ public class GameSessionController implements InterpreterListener {
 			} else {
 				css = "-fx-background-color: red;";
 			}
-			Background oldb = backgroundPanel.getBackground();
+			
 			backgroundPanel.setStyle(css);
 			this.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 

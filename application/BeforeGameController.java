@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -40,17 +41,22 @@ public class BeforeGameController implements Initializable{
 	@FXML
 	private TableView hardTable;
 	
+	@FXML
+	private CheckBox wordToggle;
+	
 	Highscore highscore = new Highscore();
 	
-			private Difficulty difficulty;
+	private Difficulty difficulty;
 	/**
 	 * Starts a new game of Tatai
 	 */
 	@FXML
 	private void startGame() {
 		
+		
+		
 		// Tell the GameSessionMaster to start a new game
-		GameSessionMaster.getInstance().newGame(difficulty);
+		GameSessionMaster.getInstance().newGame(difficulty,wordToggle.selectedProperty().getValue());
 		
 		// Change the GUI to the next scene
 		TataiApp.getInstance().nextScene(false);
@@ -64,6 +70,8 @@ public class BeforeGameController implements Initializable{
 		difficulty = Difficulty.EASY;
 		gameSelected();
 	}
+	
+	
 	
 	/**
 	 * Sets 'hard' as the difficulty level for the game
