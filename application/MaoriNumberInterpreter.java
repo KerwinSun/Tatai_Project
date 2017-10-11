@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,8 +18,21 @@ public class MaoriNumberInterpreter {
 	private BashProcess htkScript;
 	private int audioexit;
 	private List<InterpreterListener> listeners;
+	private Hashtable<String,String> htkWordMap;
 	
 	public MaoriNumberInterpreter() {
+		htkWordMap = new Hashtable<String,String>();
+		htkWordMap.put("tahi", "tahi");
+		htkWordMap.put("rua", "rua");
+		htkWordMap.put("toru", "toru");
+		htkWordMap.put("whaa", "whā");
+		htkWordMap.put("rima", "rima");
+		htkWordMap.put("ono", "ono");
+		htkWordMap.put("whitu", "whitu");
+		htkWordMap.put("waru", "waru");
+		htkWordMap.put("iwa", "iwa");
+		htkWordMap.put("tekau", "tekau");
+		htkWordMap.put("maa", "mā");
 		audiorecorder = new BashProcess();
 		audiorecorder.addCommand("arecord -d 3 -r 22050 -c 1 -i -t wav -f s16_LE foo.wav");
 		audiorecorder.setAfterTask(new AudioRecordTask());
@@ -117,7 +131,7 @@ public class MaoriNumberInterpreter {
 				boolean saidText = false;
 				while (line != null) {
 					if (saidText && !line.equals("sil")) {
-						st.append(line);
+						st.append(htkWordMap.get(line));
 						st.append(" ");
 
 					}
