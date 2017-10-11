@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BeforeGameController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BeforeGameController">
 	<center>
 		<TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
 			<tabs>
@@ -261,9 +262,10 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="75.0" layoutY="10.0" text="Pronounciation Game" />
+                        <Label layoutX="97.0" layoutY="11.0" text="Tãtai game results" />
                         <TableView fx:id="easyTable" layoutX="49.0" layoutY="31.0" prefHeight="260.0" prefWidth="100.0" />
                         <TableView fx:id="hardTable" layoutX="162.0" layoutY="32.0" prefHeight="260.0" prefWidth="100.0" />
+                        <TextArea fx:id="feedBack" editable="false" layoutX="279.0" layoutY="32.0" prefHeight="265.0" prefWidth="301.0" text="Highest Score for easy Mode is:&#10;&#10;Highest Score for hard Mode is:&#10;&#10;Top word that should be practised are:&#10;&#10;Top word that you are best at are:&#10;&#10;Total number of games won:&#10;" />
                      </children>
                   </Pane>
                </content>
@@ -281,7 +283,7 @@
 								<Image url="@../media/koru.png" />
 							</image>
 						</ImageView>
-						<Label alignment="CENTER" prefHeight="81.0" prefWidth="600.0" text="TATAI" textFill="#ff0000f7">
+						<Label alignment="CENTER" prefHeight="81.0" prefWidth="600.0" text="Tãtai" textFill="#ff0000f7">
 							<font>
 								<Font name="DejaVu Serif Bold" size="64.0" />
 							</font>

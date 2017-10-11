@@ -1,7 +1,9 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -15,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import model.Difficulty;
 import model.GameSessionMaster;
@@ -43,6 +46,9 @@ public class BeforeGameController implements Initializable{
 	
 	@FXML
 	private CheckBox wordToggle;
+	
+	@FXML
+	private TextArea feedBack;
 	
 	Highscore highscore = new Highscore();
 	
@@ -87,26 +93,8 @@ public class BeforeGameController implements Initializable{
 		
 		
 	}
-	//updates the score on startup or after a game
-	private void ScoreUpdate(TableView Table, String mode)
-	{
-		ArrayList<String> highscoreData = highscore.getHighscore(mode);
-		System.out.println(highscoreData);
-		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
-		
-		Table.setPlaceholder(new Label("No Scores"));
-		Table.setEditable(true);
-		Table.setItems(data);
-		
-		TableColumn<String, String> tc = new TableColumn<>(mode);
-		tc.setPrefWidth(99);
-		tc.setCellValueFactory((p) -> {
-			return new ReadOnlyStringWrapper(p.getValue());
-		});
-		Table.getColumns().add(tc);
-
 	
-	}
+	
 	
 	/**
 	 * Shows the user statistics for their specified difficulty level and allows
@@ -146,8 +134,54 @@ public class BeforeGameController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		ScoreUpdate(easyTable, "Easy");
-		ScoreUpdate(hardTable, "Hard");
+		scoreUpdate(easyTable, "Easy");
+		scoreUpdate(hardTable, "Hard");
+		feedBackUpdate();
 		
+	}
+	
+	//sets and formats all the text for the feedback area
+	private void feedBackUpdate() {
+		
+		
+		Integer easyHighest = Collections.max(highscore.getHighscoreInt("Easy"));
+		Integer hardHighest = Collections.max(highscore.getHighscoreInt("Hard"));
+		
+		
+		feedBack.setText("");
+		feedBack.appendText("Your top score for easy mode is: " + easyHighest + "/10 \n\n");
+		feedBack.appendText("Your top score for hard mode is: " + hardHighest + "/10 \n\n");
+		
+		feedBack.appendText("You have won: " +highscore.getWinTotal()[0]+ " out of " +highscore.getWinTotal()[1]+" games \n\n");
+		
+		feedBack.appendText("Some helpful tips: \n\n");
+		
+		feedBack.appendText("The word you are best at saying is: "+ highscore.getWordFrequency("Success")+ "\n\n");
+
+		
+		feedBack.appendText("The word that needs some practise is: "+ highscore.getWordFrequency("Failed")+ "\n\n");
+	
+		feedBack.appendText("KEEP IT UP!!!");
+	}
+
+	//updates the score on startup or after a game
+	private void scoreUpdate(TableView Table, String mode)
+	{
+		ArrayList<String> highscoreData = highscore.getHighscore(mode);
+		System.out.println(highscoreData);
+		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
+		
+		Table.setPlaceholder(new Label("No Scores"));
+		Table.setEditable(true);
+		Table.setItems(data);
+		
+		TableColumn<String, String> tc = new TableColumn<>(mode);
+		tc.setPrefWidth(99);
+		tc.setCellValueFactory((p) -> {
+			return new ReadOnlyStringWrapper(p.getValue());
+		});
+		Table.getColumns().add(tc);
+
+	
 	}
 }

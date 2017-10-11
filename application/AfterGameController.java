@@ -76,7 +76,7 @@ public class AfterGameController {
 		try {
 			
 			saveHighscore();
-		
+			saveFailedWords();
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -85,6 +85,7 @@ public class AfterGameController {
 		displayGameStats();
         displayScore();
         giveFeedback();
+        
         
 	}
 
@@ -158,15 +159,16 @@ public class AfterGameController {
 		
 		Difficulty difficulty = GameSessionMaster.getInstance().getDifficulty();
 		int score = GameSessionMaster.getInstance().getScore();
+		Highscore saveScore = new Highscore();
 		
 		if(difficulty.equals(Difficulty.HARD)) {
 			
-			Highscore saveScore = new Highscore();
+			
 			saveScore.addHighscore("Hard", score);
 			
 		}else if(difficulty.equals(Difficulty.EASY)) {
 			
-			Highscore saveScore = new Highscore();
+			
 			saveScore.addHighscore("Easy", score);
 			
 		}
@@ -175,8 +177,25 @@ public class AfterGameController {
 	
 	}
 
-
-
-
+	private void saveFailedWords() throws IOException {
+	
+	ProblemDatum[] gameData = GameSessionMaster.getInstance().getGameHistory();
+	Highscore saveScore = new Highscore();
+	
+	for(ProblemDatum problem: gameData) {
+		
+		if(!(problem.getAnswer().equals(problem.getUserAnswer()))) {
+			
+			saveScore.addWordsData("Failed",problem.getAnswer());
+			
+		}else {
+			
+			saveScore.addWordsData("Success",problem.getAnswer());
+			
+		}
+		
+	}
+	
+	}
 
 }
