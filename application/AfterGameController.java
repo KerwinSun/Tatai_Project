@@ -24,10 +24,9 @@ import javafx.scene.image.ImageView;
  */
 public class AfterGameController {
 
+	
 	@FXML
-	private Button newEasyButton;
-	@FXML
-	private Button newHardButton;
+	private Button returnButton;
 	@FXML
 	private TableView<ProblemDatum> historyTable;
 	@FXML
@@ -50,22 +49,9 @@ public class AfterGameController {
 	 */
 	private ObservableList<ProblemDatum> gameData;
 	
-	/**
-	 * Creates a new game on easy mode (numbers 1-10)
-	 */
 	@FXML
-	private void newEasyGame() {
-		GameSessionMaster.getInstance().newGame(Difficulty.EASY,true);
-		TataiApp.getInstance().nextScene(false);
-	}
-	
-	/**
-	 * Creates a new game on hard mode (numbers 1-99).
-	 */
-	@FXML
-	private void newHardGame() {
-		GameSessionMaster.getInstance().newGame(Difficulty.HARD,true);
-		TataiApp.getInstance().nextScene(false);
+	private void goHome() {
+		TataiApp.getInstance().setScene(TataiApp.BEFORE_GAME_VIEW);
 	}
 	
 	/**
