@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import model.Difficulty;
 import model.GameSessionMaster;
 
@@ -27,6 +28,7 @@ public class GameSessionController implements InterpreterListener {
 	private static final String PATH_TO_PASS_SOUND = "pass.mp3";
 	private Background oldb;
 	private MaoriNumberInterpreter voiceRecogniser;
+	private Font defaultTextFont;
 	
 	@FXML
 	ImageView difficultyIcon;
@@ -55,6 +57,7 @@ public class GameSessionController implements InterpreterListener {
 	@FXML
 	private void initialize() {
 		oldb = backgroundPanel.getBackground();
+		defaultTextFont = numberProblem.getFont();
 		setDifficultyIcon();
 		setProblem();
 	}
@@ -82,6 +85,15 @@ public class GameSessionController implements InterpreterListener {
 		// Display the problem
 		String problem = GameSessionMaster.getInstance().getProblem();
 		numberProblem.setText("" + problem);
+		if (problem.length()>7 && problem.length() < 20) {
+			
+			numberProblem.setFont(new Font(defaultTextFont.getName(), 40));
+		}else if (problem.length()>=20){
+			numberProblem.setFont(new Font(defaultTextFont.getName(), 20));
+			
+		}else {
+			numberProblem.setFont(defaultTextFont);
+		}
 		
 		// Enable microphone button
 		micButton.setDisable(false);
