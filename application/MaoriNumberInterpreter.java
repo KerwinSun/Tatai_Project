@@ -37,7 +37,7 @@ public class MaoriNumberInterpreter {
 		audiorecorder.addCommand("arecord -d 3 -r 22050 -c 1 -i -t wav -f s16_LE foo.wav");
 		audiorecorder.setAfterTask(new AudioRecordTask());
 		htkScript = new BashProcess();
-		htkScript.addCommand("HVite -H /home/se206/Documents/HTK/MaoriNumbers/HMMs/hmm15/macros -H /home/se206/Documents/HTK/MaoriNumbers/HMMs/hmm15/hmmdefs -C /home/se206/Documents/HTK/MaoriNumbers/user/configLR  -w /home/se206/Documents/HTK/MaoriNumbers/user/wordNetworkNum -o SWT -l '*' -i recout.mlf -p 0.0 -s 5.0  /home/se206/Documents/HTK/MaoriNumbers/user/dictionaryD /home/se206/Documents/HTK/MaoriNumbers/user/tiedList foo.wav");
+		htkScript.addCommand("HVite -H ~/Documents/HTK/MaoriNumbers/HMMs/hmm15/macros -H ~Documents/HTK/MaoriNumbers/HMMs/hmm15/hmmdefs -C ~Documents/HTK/MaoriNumbers/user/configLR  -w ~Documents/HTK/MaoriNumbers/user/wordNetworkNum -o SWT -l '*' -i recout.mlf -p 0.0 -s 5.0  ~/Documents/HTK/MaoriNumbers/user/dictionaryD ~/Documents/HTK/MaoriNumbers/user/tiedList foo.wav");
 		htkScript.setAfterTask(new HTKTask());
 		listeners=new LinkedList<InterpreterListener>();
 

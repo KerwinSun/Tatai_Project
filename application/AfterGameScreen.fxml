@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AfterGameController">
+<BorderPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AfterGameController">
 	<center>
 		<TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
 			<tabs>
@@ -70,11 +70,7 @@
 														<Font name="DejaVu Serif Bold" size="13.0" />
 													</font>
 												</Label>
-												<Button fx:id="newEasyButton" layoutX="171.0" layoutY="54.0" mnemonicParsing="false" onAction="#newEasyGame" text="Easy Game">
-                                       <font>
-                                          <Font name="DejaVu Serif" size="13.0" />
-                                       </font></Button>
-                                    <Button fx:id="newHardButton" layoutX="323.0" layoutY="54.0" mnemonicParsing="false" onAction="#newHardGame" text="Hard Game">
+                                    <Button fx:id="returnButton" layoutX="231.0" layoutY="54.0" mnemonicParsing="false" onAction="#goHome" text="Return to Menu">
                                        <font>
                                           <Font name="DejaVu Serif" size="13.0" />
                                        </font></Button>
