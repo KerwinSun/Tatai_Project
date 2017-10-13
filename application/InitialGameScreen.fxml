@@ -49,6 +49,11 @@
 																		<Font name="DejaVu Serif" size="13.0" />
 																	</font>
 																</RadioButton>
+                                                <RadioButton fx:id="practiseRadio" layoutX="86.0" layoutY="14.0" mnemonicParsing="false" onAction="#practiseGameSelected" text="PRACTISE" toggleGroup="$difficulty">
+                                                   <font>
+                                                      <Font name="DejaVu Serif" size="13.0" />
+                                                   </font>
+                                                </RadioButton>
 																<AnchorPane layoutX="301.0" layoutY="5.0" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA;">
 																	<children>
 																		<Label fx:id="statsDescription" alignment="CENTER" layoutY="5.0" prefHeight="26.0" prefWidth="218.0" style="-fx-text-fill: red;" text="Your statistics here:">
@@ -283,7 +288,7 @@
 								<Image url="@../media/koru.png" />
 							</image>
 						</ImageView>
-						<Label alignment="CENTER" prefHeight="81.0" prefWidth="600.0" text="Tãtai" textFill="#ff0000f7">
+						<Label alignment="CENTER" prefHeight="81.0" prefWidth="600.0" text="TĀTAI" textFill="#ff0000f7">
 							<font>
 								<Font name="DejaVu Serif Bold" size="64.0" />
 							</font>

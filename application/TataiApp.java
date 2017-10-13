@@ -72,10 +72,13 @@ public class TataiApp extends Application {
 		changeScene();
 	}
 	
+	
+	
 	public void setScene(String scene) {
 		currentScene=scene;
 		changeScene();
 	}
+	
 	/**
 	 * Changes the screen being displayed
 	 */

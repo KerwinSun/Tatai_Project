@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AfterGameController">
+<BorderPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AfterGameController">
 	<center>
 		<TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
 			<tabs>
@@ -253,7 +253,7 @@
 								<Image url="@../media/koru.png" />
 							</image>
 						</ImageView>
-						<Label alignment="CENTER" prefHeight="81.0" prefWidth="600.0" text="TATAI" textFill="#ff0000f7">
+						<Label alignment="CENTER" prefHeight="81.0" prefWidth="600.0" text="TĀTAI" textFill="#ff0000f7">
 							<font>
 								<Font name="DejaVu Serif Bold" size="64.0" />
 							</font>

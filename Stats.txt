@@ -1,2 +1,2 @@
-EASY 0 16
+EASY 0 18
 HARD 0 2

@@ -207,7 +207,7 @@ public class Highscore {
 			   
 		   }
 		}
-		System.out.print(returnWord);
+		
 		
 		return returnWord;
 		

@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -46,6 +47,8 @@ public class BeforeGameController implements Initializable{
 	
 	@FXML
 	private CheckBox wordToggle;
+	@FXML
+	private RadioButton practiseRadio;
 	
 	@FXML
 	private TextArea feedBack;
@@ -60,20 +63,31 @@ public class BeforeGameController implements Initializable{
 	private void startGame() {
 		
 		
+		if(difficulty.equals(Difficulty.PRACTISE) ) {
 		
+		TataiApp.getInstance().setScene("practiseGameScreen.fxml");
+		
+		
+		}else {
 		// Tell the GameSessionMaster to start a new game
 		GameSessionMaster.getInstance().newGame(difficulty,wordToggle.selectedProperty().getValue());
 		
 		// Change the GUI to the next scene
 		TataiApp.getInstance().nextScene(false);
+		}
 	}
+	
+	
+	
 	
 	/**
 	 * Sets 'easy' as the difficulty level for the game 
 	 */
 	@FXML
 	private void easyGameSelected() {
+		
 		difficulty = Difficulty.EASY;
+		
 		gameSelected();
 	}
 	
@@ -86,6 +100,14 @@ public class BeforeGameController implements Initializable{
 	private void hardGameSelected() {
 		difficulty = Difficulty.HARD;
 		gameSelected();
+	}
+	
+	@FXML
+	private void practiseGameSelected() {
+		
+		difficulty = Difficulty.PRACTISE;
+		enableStart();
+		
 	}
 	
 	@FXML
@@ -104,8 +126,7 @@ public class BeforeGameController implements Initializable{
 		
 		// Show user statistics for their specified difficulty level
 		showStats();
-
-		
+	
 		// Allow game to be started
 		enableStart();
 	}
@@ -115,6 +136,7 @@ public class BeforeGameController implements Initializable{
 	 * selected
 	 */
 	private void showStats() {
+		
 		
 		String statsAsString = GameSessionMaster.getInstance().getStatsAsString(difficulty);
 		userStats.setText(statsAsString);
@@ -168,7 +190,7 @@ public class BeforeGameController implements Initializable{
 	private void scoreUpdate(TableView Table, String mode)
 	{
 		ArrayList<String> highscoreData = highscore.getHighscore(mode);
-		System.out.println(highscoreData);
+		
 		final ObservableList<String> data = FXCollections.observableArrayList(highscoreData);
 		
 		Table.setPlaceholder(new Label("No Scores"));
