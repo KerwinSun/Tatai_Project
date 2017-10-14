@@ -88,10 +88,10 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 		if(enteredText.equals(saidText)) {
 			
 
-			Alert alert = new Alert(AlertType.CONFIRMATION, "YOU PRONOUNCED '" + enteredText + "' PERFECTLY", ButtonType.OK);
+			Alert alert = new Alert(AlertType.CONFIRMATION, "You pronounced '" + enteredText + "' perfectly", ButtonType.OK);
 			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 			alert.setTitle("Results");
-			alert.setHeaderText("!!!CORRECT!!!");
+			alert.setHeaderText("Well Done!");
 			alert.showAndWait();
 			
 			
