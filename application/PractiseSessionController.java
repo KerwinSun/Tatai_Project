@@ -44,6 +44,7 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 		saidText = text;
 		checkCorrectness();
 		micButton.setDisable(false);
+		numberEntered.setEditable(true);
 	}
 
 
