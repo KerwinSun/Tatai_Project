@@ -97,7 +97,7 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 			
 		}else {
 			
-			Alert alert = new Alert(AlertType.CONFIRMATION, "The correct pronounciation was: '" + enteredText + "' unfortunatly you said '" + saidText + "'.  \nPress record to try again",  ButtonType.OK);
+			Alert alert = new Alert(AlertType.CONFIRMATION, "The number we were trying to hear was: '" + enteredText + "' unfortunatly what we heard was '" + saidText + "'.  \nPress record to try again",  ButtonType.OK);
 			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 			alert.setTitle("Results");
 			alert.setHeaderText("Try again");
