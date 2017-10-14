@@ -1,6 +1,8 @@
 package model.maori;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
 import model.Problem;
@@ -26,9 +28,14 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 		 * Returns a new problem
 		 */
 		public Problem newProblem() {
-			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
-			String maoriValue = int2maori(value);
+			
+			
+			//mathmode is true when the problems are math problems
 			if (mathmode == false) {
+				//the answer to the problem
+				int value = rng.nextInt(highrange-lowrange+1) + lowrange;
+				String maoriValue = int2maori(value);
+				//just output the number
 				if (wordmode == false) {
 					return new Problem(genQuestion(value),maoriValue);
 				}else {
@@ -36,34 +43,86 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 				}
 				
 			}else {
-				int mathnum = rng.nextInt(highrange-lowrange+1) + lowrange;
-				if (mathnum==value) {
-					if (mathnum==highrange) {
-						mathnum--;
-					}else {
-						mathnum++;
-					}
-				}
-				int remain = value - mathnum;
-				String equation;
-				if (remain < 0) {
-					if (wordmode) {
-						equation = int2maori(mathnum) + " - " + int2maori(Math.abs(remain));
-					}else {
-						equation = mathnum + " - " + Math.abs(remain);
-					}
-					
+				if (rng.nextBoolean()) {
+					return newSumProblem();
 				}else {
-					if (wordmode) {
-						equation = int2maori(mathnum) + " + " + int2maori(remain);
-					}else {
-						equation = mathnum + " + " + remain;
-					}
+					return newProductProblem();
 				}
-				return new Problem(equation,maoriValue);
+				
 			}
 			
 			
+		}
+		
+		public Problem newSumProblem() {
+			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
+			String maoriValue = int2maori(value);
+			//this number and the answer will determine the second number
+			int mathnum = rng.nextInt(highrange-lowrange+1) + lowrange;
+			
+			//can't have problem where operand and answer are the same
+			if (mathnum==value) {
+				
+				//have to subtract is highrange 
+				if (mathnum==highrange) {
+					mathnum--;
+				}else {
+					mathnum++;
+				}
+			}
+			int remain = value - mathnum;
+			String equation;
+			//if remain is negative do a subtraction problem other a addition problem
+			if (remain < 0) {
+				if (wordmode) {
+					equation = int2maori(mathnum) + " - " + int2maori(Math.abs(remain));
+				}else {
+					equation = mathnum + " - " + Math.abs(remain);
+				}
+				
+			}else {
+				if (wordmode) {
+					equation = int2maori(mathnum) + " + " + int2maori(remain);
+				}else {
+					equation = mathnum + " + " + remain;
+				}
+			}
+			return new Problem(equation,maoriValue);
+		}
+		
+		public Problem newProductProblem() {
+			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
+			String maoriValue = int2maori(value);
+			
+			List<Integer> factors = new ArrayList<Integer>();
+			List<Integer> divisors = new ArrayList<Integer>();
+			for (int i=lowrange;i<=highrange;i++) {
+				if (value % i == 0) {
+					factors.add(i);
+				}
+				if (i%value==0) {
+					divisors.add(i);
+				}
+			}
+			String equation;
+			if (rng.nextBoolean()) {
+				int mathnum = factors.get(rng.nextInt(factors.size()));
+				if (wordmode) {
+					equation = int2maori(mathnum) + " x " + int2maori(value/mathnum);
+				}else {
+					equation = mathnum + " x " + value/mathnum;
+				}
+				
+			}else {
+				int mathnum = divisors.get(rng.nextInt(divisors.size()));
+				if (wordmode) {
+					equation = int2maori(mathnum) + " / " + int2maori(mathnum/value);
+				}else {
+					equation = mathnum + " / " + mathnum/value;
+				}
+			}
+			
+			return new Problem(equation,maoriValue);
 		}
 		
 		public void wordMode(boolean mode) {
