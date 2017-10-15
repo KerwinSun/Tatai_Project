@@ -157,18 +157,25 @@ public class BeforeGameController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		scoreUpdate(easyTable, "Easy");
+		
 		scoreUpdate(hardTable, "Hard");
+		
 		feedBackUpdate();
+		
 		
 	}
 	
 	//sets and formats all the text for the feedback area
 	private void feedBackUpdate() {
 		
-		
-		Integer easyHighest = Collections.max(highscore.getHighscoreInt("Easy"));
-		Integer hardHighest = Collections.max(highscore.getHighscoreInt("Hard"));
-		
+		Integer easyHighest = 0;
+		Integer hardHighest = 0;
+		if(!highscore.getHighscoreInt("Easy").isEmpty()) {
+		easyHighest = Collections.max(highscore.getHighscoreInt("Easy"));
+		}
+		if(!highscore.getHighscoreInt("Easy").isEmpty()) {
+		hardHighest = Collections.max(highscore.getHighscoreInt("Hard"));
+		}
 		
 		feedBack.setText("");
 		feedBack.appendText("Your top score for easy mode is: " + easyHighest + "/10 \n\n");
@@ -199,9 +206,11 @@ public class BeforeGameController implements Initializable{
 		
 		TableColumn<String, String> tc = new TableColumn<>(mode);
 		tc.setPrefWidth(99);
+		
 		tc.setCellValueFactory((p) -> {
 			return new ReadOnlyStringWrapper(p.getValue());
 		});
+		
 		Table.getColumns().add(tc);
 
 	
