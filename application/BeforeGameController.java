@@ -1,7 +1,9 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -156,24 +158,30 @@ public class BeforeGameController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		dataFileCreator();		
 		scoreUpdate(easyTable, "Easy");
-		
+		System.out.println("1");
 		scoreUpdate(hardTable, "Hard");
-		
+		System.out.print("2");
 		feedBackUpdate();
+		
 		
 		
 	}
 	
+
+
 	//sets and formats all the text for the feedback area
 	private void feedBackUpdate() {
 		
 		Integer easyHighest = 0;
 		Integer hardHighest = 0;
+		
 		if(!highscore.getHighscoreInt("Easy").isEmpty()) {
+		
 		easyHighest = Collections.max(highscore.getHighscoreInt("Easy"));
 		}
-		if(!highscore.getHighscoreInt("Easy").isEmpty()) {
+		if(!highscore.getHighscoreInt("Hard").isEmpty()) {
 		hardHighest = Collections.max(highscore.getHighscoreInt("Hard"));
 		}
 		
@@ -191,6 +199,7 @@ public class BeforeGameController implements Initializable{
 		feedBack.appendText("The word that needs some practise is: "+ highscore.getWordFrequency("Failed")+ "\n\n");
 	
 		feedBack.appendText("KEEP IT UP!!!");
+		
 	}
 
 	//updates the score on startup or after a game
@@ -215,4 +224,19 @@ public class BeforeGameController implements Initializable{
 
 	
 	}
+	
+
+	private void dataFileCreator() {
+		File highscoreFile = new File("Highscores.txt");
+		File wordDataFile = new File("WordData.txt");
+		try {
+			highscoreFile.createNewFile();
+			wordDataFile.createNewFile();
+		} catch (IOException ignore) {
+		
+		}
+		
+	}
+
+
 }
