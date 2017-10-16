@@ -21,6 +21,8 @@ public class MaoriNumberInterpreter {
 	private Hashtable<String,String> htkWordMap;
 	
 	public MaoriNumberInterpreter() {
+		
+		//HDK words are not all correctly spelt so this mapping is used to correct
 		htkWordMap = new Hashtable<String,String>();
 		htkWordMap.put("tahi", "tahi");
 		htkWordMap.put("rua", "rua");
@@ -33,12 +35,20 @@ public class MaoriNumberInterpreter {
 		htkWordMap.put("iwa", "iwa");
 		htkWordMap.put("tekau", "tekau");
 		htkWordMap.put("maa", "mā");
+		
+		
 		audiorecorder = new BashProcess();
 		audiorecorder.addCommand("arecord -d 3 -r 22050 -c 1 -i -t wav -f s16_LE foo.wav");
+		
+		//After task is added, aftertasks are runnable executed on main thread after bash commands are done
 		audiorecorder.setAfterTask(new AudioRecordTask());
 		htkScript = new BashProcess();
+		
+		//generic ~ is used to allow different usernames
 		htkScript.addCommand("HVite -H ~/Documents/HTK/MaoriNumbers/HMMs/hmm15/macros -H ~/Documents/HTK/MaoriNumbers/HMMs/hmm15/hmmdefs -C ~/Documents/HTK/MaoriNumbers/user/configLR  -w ~/Documents/HTK/MaoriNumbers/user/wordNetworkNum -o SWT -l '*' -i recout.mlf -p 0.0 -s 5.0  ~/Documents/HTK/MaoriNumbers/user/dictionaryD ~/Documents/HTK/MaoriNumbers/user/tiedList foo.wav");
 		htkScript.setAfterTask(new HTKTask());
+		
+		
 		listeners=new LinkedList<InterpreterListener>();
 
 	}
@@ -130,6 +140,7 @@ public class MaoriNumberInterpreter {
 				String line = br.readLine();
 				boolean saidText = false;
 				while (line != null) {
+					//only reads words between "sil"
 					if (saidText && !line.equals("sil")) {
 						st.append(htkWordMap.get(line));
 						st.append(" ");
