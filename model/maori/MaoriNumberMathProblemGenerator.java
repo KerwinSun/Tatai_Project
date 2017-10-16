@@ -100,10 +100,15 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 			return new Problem(equation,maoriValue);
 		}
 		
+		/**
+		 * 
+		 * @return new problem with a product question
+		 */
 		public Problem newProductProblem() {
 			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
 			String maoriValue = int2maori(value);
 			
+			//gets the factors of the answer
 			List<Integer> factors = new ArrayList<Integer>();
 			for (int i=lowrange;i<=highrange;i++) {
 				if (value % i == 0) {
@@ -113,6 +118,7 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 			}
 			String equation;
 			
+			//builds the equations using a random factor
 			int mathnum = factors.get(rng.nextInt(factors.size()));
 			if (wordmode) {
 				equation = int2maori(mathnum) + " x " + int2maori(value/mathnum);
@@ -124,11 +130,16 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 			
 			return new Problem(equation,maoriValue);
 		}
+		
+		/**
+		 * 
+		 * @return new problem with divison question
+		 */
 		public Problem newDivisionProblem() {
 			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
 			String maoriValue = int2maori(value);
 			
-			
+			//gets a list of all factors of the answer
 			List<Integer> divisors = new ArrayList<Integer>();
 			for (int i=lowrange;i<=highrange;i++) {
 				if (i%value==0) {
@@ -137,6 +148,7 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 			}
 			String equation;
 			
+			//creates the problem
 			int mathnum = divisors.get(rng.nextInt(divisors.size()));
 			if (wordmode) {
 				equation = int2maori(mathnum) + " / " + int2maori(mathnum/value);
