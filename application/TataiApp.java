@@ -73,7 +73,10 @@ public class TataiApp extends Application {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param scene forces app to specific scene
+	 */
 	public void setScene(String scene) {
 		currentScene=scene;
 		changeScene();
