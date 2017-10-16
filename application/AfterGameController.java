@@ -163,6 +163,11 @@ public class AfterGameController {
 	
 	}
 
+	/**
+	 * Keeps a record of what words the user had trouble with so the user
+	 * can be informed on areas to improve
+	 * @throws IOException
+	 */
 	private void saveFailedWords() throws IOException {
 	
 	ProblemDatum[] gameData = GameSessionMaster.getInstance().getGameHistory();
