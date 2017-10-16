@@ -12,6 +12,11 @@ import model.maori.MaoriNumberMathProblemGenerator;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 
+/**
+ * 
+ * This class is the FXML controller for the practice screen
+ *
+ */
 public class PractiseSessionController extends MaoriNumberMathProblemGenerator implements InterpreterListener {
 
 	private MaoriNumberInterpreter voiceRecogniser;
@@ -28,16 +33,24 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 	String saidText;
 	String enteredText;
 	
+	/**
+	 * Method is called when Controller is constructed 
+	 */
 	@FXML
 	private void initialize() {
 
 		micButton.setDisable(true);
+		
+		//sets the textfield to run the checker when text is typed
 		numberEntered.textProperty().addListener((observable, oldValue, newValue) -> {
 		    textValidityChecker();
 		});
 	}
 
 
+	/**
+	 * Response from the Interpreter
+	 */
 	@Override
 	public void interpretedText(String text) {
 
@@ -48,6 +61,9 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 	}
 
 
+	/**
+	 * records users voice
+	 */
 	@FXML
 	private void takeRecording(){
 
@@ -63,20 +79,28 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 
 	@Override
 	public void recordStart() {
-		
+		//interface method not needed do nothing
 
 	}
 
+	/**
+	 * interface method tells the class the recording has ended
+	 */
 	@Override
 	public void recordEnd() {
 
 		voiceRecogniser.playbackRecording();
+		
+		//run the phaser we now have the recording
 		voiceRecogniser.runPharser();
 
 
 
 	}
 
+	/**
+	 * check is what was heard by HDK is correct
+	 */
 	private void checkCorrectness() {
 
 		int parsedNum = Integer.parseInt(numberEntered.getText());
@@ -109,7 +133,9 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 
 	}
 	
-	
+	/**
+	 * checks the text feild is only getting numbers
+	 */
 	private void textValidityChecker() {
 
 		String text = numberEntered.getText();
@@ -147,6 +173,9 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 
 	}
 
+	/**
+	 * gives the user a prompt to confirm exiting the game
+	 */
 	@FXML
 	private void exitGame(){
 
