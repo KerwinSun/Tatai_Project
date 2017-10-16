@@ -12,6 +12,9 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 
 		private boolean wordmode =false;
 		private boolean mathmode =true;
+		private boolean summode = false;
+		private boolean prodmode = false;
+		private boolean divmode = false;
 		protected int lowrange; // Lowest supported value is 1
 		protected int highrange; // Highest supported value is 99
 		protected Random rng; // Dependency injection
@@ -43,11 +46,18 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 				}
 				
 			}else {
-				if (rng.nextBoolean()) {
-					return newSumProblem();
-				}else {
-					return newProductProblem();
+				//loops until rng decides on problem type
+				while (true) {
+					int choice = rng.nextInt(3);
+					if (choice == 0 && summode) {
+						return newSumProblem();
+					}else if(choice == 1 && prodmode) {
+						return newProductProblem();
+					}else if(choice == 2 && divmode) {
+						return newDivisionProblem();
+					}
 				}
+				
 				
 			}
 			
@@ -95,36 +105,48 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 			String maoriValue = int2maori(value);
 			
 			List<Integer> factors = new ArrayList<Integer>();
-			List<Integer> divisors = new ArrayList<Integer>();
 			for (int i=lowrange;i<=highrange;i++) {
 				if (value % i == 0) {
 					factors.add(i);
 				}
+	
+			}
+			String equation;
+			
+			int mathnum = factors.get(rng.nextInt(factors.size()));
+			if (wordmode) {
+				equation = int2maori(mathnum) + " x " + int2maori(value/mathnum);
+			}else {
+				equation = mathnum + " x " + value/mathnum;
+			}
+				
+			
+			
+			return new Problem(equation,maoriValue);
+		}
+		public Problem newDivisionProblem() {
+			int value = rng.nextInt(highrange-lowrange+1) + lowrange;
+			String maoriValue = int2maori(value);
+			
+			
+			List<Integer> divisors = new ArrayList<Integer>();
+			for (int i=lowrange;i<=highrange;i++) {
 				if (i%value==0) {
 					divisors.add(i);
 				}
 			}
 			String equation;
-			if (rng.nextBoolean()) {
-				int mathnum = factors.get(rng.nextInt(factors.size()));
-				if (wordmode) {
-					equation = int2maori(mathnum) + " x " + int2maori(value/mathnum);
-				}else {
-					equation = mathnum + " x " + value/mathnum;
-				}
-				
+			
+			int mathnum = divisors.get(rng.nextInt(divisors.size()));
+			if (wordmode) {
+				equation = int2maori(mathnum) + " / " + int2maori(mathnum/value);
 			}else {
-				int mathnum = divisors.get(rng.nextInt(divisors.size()));
-				if (wordmode) {
-					equation = int2maori(mathnum) + " / " + int2maori(mathnum/value);
-				}else {
-					equation = mathnum + " / " + mathnum/value;
-				}
+				equation = mathnum + " / " + mathnum/value;
 			}
+			
 			
 			return new Problem(equation,maoriValue);
 		}
-		
 		public void wordMode(boolean mode) {
 			wordmode=mode;
 		}
@@ -195,5 +217,20 @@ public abstract class MaoriNumberMathProblemGenerator implements ProblemGenerato
 		 */
 		protected String genQuestion(int answer) {
 			return new Integer(answer).toString();
+		}
+
+		public void sumProbs(boolean sumprob) {
+			summode=sumprob;
+			
+		}
+
+		public void multiProbs(boolean multiprob) {
+			prodmode=multiprob;
+			
+		}
+
+		public void divProbs(boolean divprob) {
+			divmode=divprob;
+			
 		}
 	}

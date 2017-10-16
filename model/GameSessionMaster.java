@@ -49,7 +49,7 @@ public class GameSessionMaster {
 	 * Creates a model for a new game
 	 * @param difficulty the difficulty level of the game to be started
 	 */
-	public void newGame(Difficulty difficulty,boolean wordmode) {
+	public void newGame(Difficulty difficulty,boolean wordmode,boolean sumprob,boolean multiprob,boolean divprob) {
 		MaoriNumberMathProblemGenerator gen;
 		// Create a GameMaster to store the state of the game
 		if (difficulty.equals(Difficulty.EASY)) {
@@ -58,9 +58,11 @@ public class GameSessionMaster {
 		} else {
 			gen = new LargeNumberProblemGenerator();
 		}
-		if (wordmode) {
-			gen.wordMode(wordmode);
-		}
+		
+		gen.wordMode(wordmode);
+		gen.sumProbs(sumprob);
+		gen.multiProbs(multiprob);
+		gen.divProbs(divprob);
 		gen.mathMode(true);
 		game = new GameMaster(gen, NUM_QUESTIONS);
 		attemptsRemaining = MAX_ATTEMPTS;

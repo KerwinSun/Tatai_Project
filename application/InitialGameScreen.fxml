@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BeforeGameController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BeforeGameController">
 	<center>
 		<TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
 			<tabs>
@@ -54,20 +54,18 @@
                                                       <Font name="DejaVu Serif" size="13.0" />
                                                    </font>
                                                 </RadioButton>
-																<AnchorPane layoutX="301.0" layoutY="5.0" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA;">
-																	<children>
-																		<Label fx:id="statsDescription" alignment="CENTER" layoutY="5.0" prefHeight="26.0" prefWidth="218.0" style="-fx-text-fill: red;" text="Your statistics here:">
-																			<font>
-																				<Font name="DejaVu Serif" size="13.0" />
-																			</font>
-																		</Label>
-																		<Label fx:id="userStats" alignment="CENTER" layoutX="14.0" layoutY="26.0" prefHeight="30.0" prefWidth="192.0" text="">
-																			<font>
-																				<Font name="DejaVu Serif" size="13.0" />
-																			</font>
-																		</Label>
-																	</children>
-																</AnchorPane>
+                                                <CheckBox fx:id="addSub" layoutX="244.0" layoutY="13.0" mnemonicParsing="false" onAction="#questionType" text="Addition/Subtraction">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></CheckBox>
+                                                <CheckBox fx:id="multimode" layoutX="244.0" layoutY="39.0" mnemonicParsing="false" onAction="#questionType" text="Multiplication">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></CheckBox>
+                                                <CheckBox fx:id="divmode" layoutX="417.0" layoutY="13.0" mnemonicParsing="false" onAction="#questionType" text="Division">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></CheckBox>
 															</children>
 														</AnchorPane>
 													</children>
@@ -77,7 +75,10 @@
 														<Font name="DejaVu Serif Bold" size="13.0" />
 													</font>
 												</Label>
-                                    <CheckBox fx:id="wordToggle" layoutX="432.0" layoutY="15.0" mnemonicParsing="false" text="Show words" />
+                                    <CheckBox fx:id="wordToggle" layoutX="432.0" layoutY="15.0" mnemonicParsing="false" text="Show words">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></CheckBox>
 											</children>
 										</AnchorPane>
 									</children>

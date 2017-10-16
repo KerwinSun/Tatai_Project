@@ -34,10 +34,7 @@ public class BeforeGameController implements Initializable{
 	
 	@FXML
 	private Button startButton;
-	@FXML
-	private Label statsDescription;
-	@FXML
-	private Label userStats;
+	
 	@FXML
 	private ToggleGroup difficultyGroup;
 	@FXML
@@ -50,6 +47,12 @@ public class BeforeGameController implements Initializable{
 	@FXML
 	private CheckBox wordToggle;
 	@FXML
+	private CheckBox addSub;
+	@FXML
+	private CheckBox divmode;
+	@FXML
+	private CheckBox multimode;
+	@FXML
 	private RadioButton practiseRadio;
 	
 	@FXML
@@ -58,6 +61,8 @@ public class BeforeGameController implements Initializable{
 	Highscore highscore = new Highscore();
 	
 	private Difficulty difficulty;
+	private boolean problemSetSelected=false;
+	private boolean gameModeSelected=false;
 	/**
 	 * Starts a new game of Tatai
 	 */
@@ -72,7 +77,12 @@ public class BeforeGameController implements Initializable{
 		
 		}else {
 		// Tell the GameSessionMaster to start a new game
-		GameSessionMaster.getInstance().newGame(difficulty,wordToggle.selectedProperty().getValue());
+		
+		boolean wordmode = wordToggle.selectedProperty().getValue();
+		boolean sumprob = addSub.selectedProperty().getValue();
+		boolean multiprob = multimode.selectedProperty().getValue();
+		boolean divprob = divmode.selectedProperty().getValue();
+		GameSessionMaster.getInstance().newGame(difficulty,wordmode,sumprob,multiprob,divprob);
 		
 		// Change the GUI to the next scene
 		TataiApp.getInstance().nextScene(false);
@@ -89,11 +99,19 @@ public class BeforeGameController implements Initializable{
 	private void easyGameSelected() {
 		
 		difficulty = Difficulty.EASY;
-		
+		gameModeSelected=true;
 		gameSelected();
 	}
 	
-	
+	@FXML
+	private void questionType() {
+		if (addSub.selectedProperty().getValue()|| divmode.selectedProperty().getValue()||multimode.selectedProperty().getValue()) {
+			problemSetSelected=true;
+		}else {
+			problemSetSelected=false;
+		}
+		enableStart();
+	}
 	
 	/**
 	 * Sets 'hard' as the difficulty level for the game
@@ -101,6 +119,7 @@ public class BeforeGameController implements Initializable{
 	@FXML
 	private void hardGameSelected() {
 		difficulty = Difficulty.HARD;
+		gameModeSelected=true;
 		gameSelected();
 	}
 	
@@ -108,6 +127,7 @@ public class BeforeGameController implements Initializable{
 	private void practiseGameSelected() {
 		
 		difficulty = Difficulty.PRACTISE;
+		gameModeSelected=true;
 		enableStart();
 		
 	}
@@ -126,32 +146,24 @@ public class BeforeGameController implements Initializable{
 	 */
 	private void gameSelected() {
 		
-		// Show user statistics for their specified difficulty level
-		showStats();
+		
 	
 		// Allow game to be started
 		enableStart();
 	}
 	
-	/**
-	 * Shows the user's winning statistics for the difficulty level they have 
-	 * selected
-	 */
-	private void showStats() {
-		
-		
-		String statsAsString = GameSessionMaster.getInstance().getStatsAsString(difficulty);
-		userStats.setText(statsAsString);
-		
-		// Tell user the difficulty level for the statistics they are seeing
-		statsDescription.setText("Your statistics for " + difficulty.toString() + ":");
-	}
+	
 	
 	/**
 	 * Allows game to begin by enabling the 'start' button
 	 */
 	private void enableStart() {
-		startButton.setDisable(false);
+		if (gameModeSelected && problemSetSelected) {
+			startButton.setDisable(false);
+		}else {
+			startButton.setDisable(true);
+		}
+		
 	}
 
 	//calls update when game starts
