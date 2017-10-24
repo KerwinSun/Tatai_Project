@@ -158,7 +158,11 @@ public class BeforeGameController implements Initializable{
 	 * Allows game to begin by enabling the 'start' button
 	 */
 	private void enableStart() {
-		if (gameModeSelected && problemSetSelected) {
+		if(gameModeSelected && difficulty == Difficulty.PRACTISE) {
+			
+			startButton.setDisable(false);
+		}
+		else if (gameModeSelected && problemSetSelected) {
 			startButton.setDisable(false);
 		}else {
 			startButton.setDisable(true);
