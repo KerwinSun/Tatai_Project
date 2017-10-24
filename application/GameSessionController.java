@@ -57,6 +57,7 @@ public class GameSessionController implements InterpreterListener {
 	@FXML
 	private void initialize() {
 		oldb = backgroundPanel.getBackground();
+		
 		defaultTextFont = numberProblem.getFont();
 		setDifficultyIcon();
 		setProblem();
@@ -169,7 +170,7 @@ public class GameSessionController implements InterpreterListener {
 		} else {
 			bf.flashColour("red");
 		}
-
+		
 		updateGame();
 	}
 
@@ -192,7 +193,7 @@ public class GameSessionController implements InterpreterListener {
 
 		// Set a new problem
 		setProblem();
-		
+		backgroundPanel.setBackground(oldb);
 	}
 	
 	/**
@@ -264,6 +265,7 @@ public class GameSessionController implements InterpreterListener {
 	 */
 	private class BackgroundFlasher extends Service<Void>{
 		public void flashColour(String colour) {
+			
 			String css;
 			if (colour.equalsIgnoreCase("green")) {
 				css = "-fx-background-color: green;";
@@ -279,6 +281,8 @@ public class GameSessionController implements InterpreterListener {
 				@Override
 				public void handle(WorkerStateEvent event) {
 					backgroundPanel.setBackground(oldb);
+					
+					backgroundPanel.setStyle("-fx-background-color: white;");
 				}
 			
 			});
