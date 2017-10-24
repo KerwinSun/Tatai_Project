@@ -45,7 +45,7 @@ public class MaoriNumberInterpreter {
 		htkScript = new BashProcess();
 		
 		//generic ~ is used to allow different usernames
-		htkScript.addCommand("HVite -H ~/Documents/HTK/MaoriNumbers/HMMs/hmm15/macros -H ~/Documents/HTK/MaoriNumbers/HMMs/hmm15/hmmdefs -C ~/Documents/HTK/MaoriNumbers/user/configLR  -w ~/Documents/HTK/MaoriNumbers/user/wordNetworkNum -o SWT -l '*' -i recout.mlf -p 0.0 -s 5.0  ~/Documents/HTK/MaoriNumbers/user/dictionaryD ~/Documents/HTK/MaoriNumbers/user/tiedList foo.wav");
+		htkScript.addCommand("HVite -H HTK/MaoriNumbers/HMMs/hmm15/macros -H HTK/MaoriNumbers/HMMs/hmm15/hmmdefs -C HTK/MaoriNumbers/user/configLR  -w HTK/MaoriNumbers/user/wordNetworkNum -o SWT -l '*' -i recout.mlf -p 0.0 -s 5.0  HTK/MaoriNumbers/user/dictionaryD HTK/MaoriNumbers/user/tiedList foo.wav");
 		htkScript.setAfterTask(new HTKTask());
 		
 		
