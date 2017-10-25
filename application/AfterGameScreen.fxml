@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AfterGameController">
+<BorderPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AfterGameController">
 	<center>
 		<TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
 			<tabs>
@@ -93,7 +93,7 @@
 							<children>
 								<Accordion prefHeight="325.0" prefWidth="600.0">
 									<panes>
-										<TitledPane animated="false" text="About Tatai">
+										<TitledPane animated="false" text="About Tātai">
 											<content>
 												<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 													<children>
@@ -125,7 +125,7 @@
 												<Font name="DejaVu Serif Bold" size="13.0" />
 											</font>
 										</TitledPane>
-										<TitledPane animated="false" text="Playing Tatai">
+										<TitledPane animated="false" text="Playing Tātai">
 											<content>
 												<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 													<children>
@@ -203,7 +203,7 @@
 																				<Font name="DejaVu Serif" size="13.0" />
 																			</font>
 																		</Label>
-																		<Label layoutX="257.0" layoutY="270.0" text="Click this icon to quit your Tatai game">
+																		<Label layoutX="257.0" layoutY="270.0" text="Click this icon to quit your Tātai game">
 																			<font>
 																				<Font name="DejaVu Serif" size="13.0" />
 																			</font>
