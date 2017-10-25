@@ -122,7 +122,9 @@ public class BeforeGameController implements Initializable{
 		gameModeSelected=true;
 		gameSelected();
 	}
-	
+	/**
+	 * Sets 'PRACTISE' as the difficulty level for the game
+	 */
 	@FXML
 	private void practiseGameSelected() {
 		
@@ -135,7 +137,7 @@ public class BeforeGameController implements Initializable{
 	@FXML
 	private void highscoreUpdate(){
 		
-		
+		//empty method that may be elaborated on in futre updates
 	}
 	
 	
@@ -193,6 +195,9 @@ public class BeforeGameController implements Initializable{
 		Integer easyHighest = 0;
 		Integer hardHighest = 0;
 		
+		
+		//calls to different methods in the model.Highscores class to 
+		//fill data into the textfield
 		if(!highscore.getHighscoreInt("Easy").isEmpty()) {
 		
 		easyHighest = Collections.max(highscore.getHighscoreInt("Easy"));
@@ -219,6 +224,8 @@ public class BeforeGameController implements Initializable{
 	}
 
 	//updates the score on startup or after a game
+	//methold takes in a table to update and what difficulty to update that
+	//table with
 	private void scoreUpdate(TableView Table, String mode)
 	{
 		ArrayList<String> highscoreData = highscore.getHighscore(mode);
@@ -242,6 +249,7 @@ public class BeforeGameController implements Initializable{
 	}
 	
 
+	//creates txt datafiles if they don't already exist
 	private void dataFileCreator() {
 		File highscoreFile = new File("Highscores.txt");
 		File wordDataFile = new File("WordData.txt");

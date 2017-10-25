@@ -18,8 +18,10 @@ public class Highscore {
 
 
 	//writes a highscore to highscore file
+	//mehtod writes a difficulty value with a score
 	public void addHighscore(String difficulty, int Score) throws IOException {
 
+		//opens a file and writes to that file
 		try(FileWriter fw = new FileWriter("Highscores.txt", true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter out = new PrintWriter(bw))
@@ -40,6 +42,7 @@ public class Highscore {
 
 		ArrayList<String> returnableList = new ArrayList<String>();
 
+		//opens the Highscores file and looks through it
 		try{
 
 			FileReader highScores = new FileReader("Highscores.txt");
@@ -71,6 +74,7 @@ public class Highscore {
 	}
 
 	//similar to gethighscore but returns an arraylist of integers
+	//Used when comparing/sorting is needed
 	public ArrayList<Integer> getHighscoreInt(String lookFor) {
 
 		ArrayList<Integer> returnableList = new ArrayList<Integer>();
@@ -106,7 +110,8 @@ public class Highscore {
 	}
 	//
 	
-	//similar to gethighscore but returns an arraylist of integers
+	//Calculates the total number of wins and number of games played, returned in array 
+	//of size 2. calls to getighscoreInt method
 	public int[] getWinTotal() {
 
 		int gamesWon = 0;
@@ -148,6 +153,7 @@ public class Highscore {
 
 
 	}
+	//returns an arraylist of scores in string, for all scores of a specific difficulty
 	public ArrayList<String> getWordsData(String lookFor) throws IOException {
 
 		ArrayList<String> returnableList = new ArrayList<String>();
@@ -157,7 +163,9 @@ public class Highscore {
 			FileReader highScores = new FileReader("WordData.txt");
 			BufferedReader stdoutBuffered = new BufferedReader(highScores);
 			String line;
-
+			
+			//stores all the words with a specific state attached to it "success/fail"
+			//and stores it into an arraylist
 			while((line = stdoutBuffered.readLine()) != null){
 
 
@@ -177,15 +185,26 @@ public class Highscore {
 		return returnableList;
 	}
 	
+	// this method is used to calculate the most failed/succeeded word 
+	// in the wordData file, which tells the user what words they need help with
 	public String getWordFrequency(String state){
 		
+		
+		//generates an arraylist of all of the words that 
+		//has been played either correctly or incorrectly
 		ArrayList<String> failedWords = null;
 		try {
+			
 			failedWords = this.getWordsData(state);
+		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
+		
+
+		//converts the arraylist to a hashmap
+		//Uses hash mapping for calculating mode of elements
 		Map<String,Integer> map = new HashMap<String, Integer>();
 		
 		for(String word: failedWords) {

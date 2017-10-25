@@ -39,6 +39,7 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 	@FXML
 	private void initialize() {
 
+		//mic should be disabled on instantiation
 		micButton.setDisable(true);
 		
 		//sets the textfield to run the checker when text is typed
@@ -63,12 +64,17 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 
 	/**
 	 * records users voice
+	 * method called when record is pressed
 	 */
 	@FXML
 	private void takeRecording(){
 
+		//disabled mic and text field
 		micButton.setDisable(true);
 		numberEntered.setEditable(false);
+		
+		//runs record audio function
+		//adds this class as a listener
 		voiceRecogniser = new MaoriNumberInterpreter();
 		voiceRecogniser.addListener(this);
 		voiceRecogniser.recordAudio();
@@ -79,8 +85,9 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 
 	@Override
 	public void recordStart() {
-		//interface method not needed do nothing
-
+		//interface method not needed does nothing at the moment
+		//may be needed for future updates
+		
 	}
 
 	/**
@@ -103,12 +110,12 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 	 */
 	private void checkCorrectness() {
 
+		
+		
 		int parsedNum = Integer.parseInt(numberEntered.getText());
 		enteredText = int2maori(parsedNum);
-		//debugging code
-		System.out.print(int2maori(parsedNum));
-		System.out.print(saidText);
 		
+		//logic to determain what prompts to show
 		if(enteredText.equals(saidText)) {
 			
 
@@ -134,7 +141,8 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 	}
 	
 	/**
-	 * checks the text feild is only getting numbers
+	 * checks the text field is only getting numbers
+	 * 
 	 */
 	private void textValidityChecker() {
 
@@ -156,12 +164,13 @@ public class PractiseSessionController extends MaoriNumberMathProblemGenerator i
 
 			}
 
-
+		//checks text field empty
 		}else if(text.equals("")) {
 			
 			warning.setText("");
 			micButton.setDisable(true);
 			
+		//checks if only numeric
 		}else if(!text.matches("[0-9]+")) {
 			
 			warning.setText("numbers only");
