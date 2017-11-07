@@ -21,6 +21,7 @@ Getting Started
 		java -jar Tatai.jar
 
 Code Credit
+The project was written as a collaboration by Kerwin Sun and Robert Rewcastle
 Part of the code has been written by Victoria Skeggs as this project is based on Robert Rewcastle's and Victoria Skeggs assignment 3
 
 Licensing
